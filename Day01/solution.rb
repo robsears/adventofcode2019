@@ -12,7 +12,8 @@ def recursefuel(inpt)
   total_fuel
 end
 
-input = File.readlines('input').map(&:chomp).map(&:to_i)
+# Read lines into an array, convert them into integers
+input = File.readlines('input').map{|i| i.chomp.to_i }
 
 # Part 1
 sol_1 = input.map{|i| fuel(i)}.inject(0, :+)
