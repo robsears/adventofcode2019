@@ -1,0 +1,15 @@
+[package]
+name = "adventofcode_2019_day4"
+version = "1.0.0"
+authors = ["Rob Sears"]
+edition = "2018"
+
+[lib]
+name = "adventofcode_2019"
+path = "src/part_1.rs"
+
+[[bin]]
+name = "solution"
+path = "src/main.rs"
+
+[dependencies]
