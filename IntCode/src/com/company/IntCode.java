@@ -3,15 +3,17 @@ package com.company;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.Stream;
 
 public class IntCode {
 
 	public static HashMap<Integer, Integer> memory = new HashMap<>();
-	public static Integer input              = 0;
+	public static ArrayList<Integer> inputs  = new ArrayList<>();
 	public static Integer output             = 0;
 	public static Integer instructionPointer = 0;
+	public static Boolean pause              = false;
 
 	public static void run(String instructionFile) {
 		parseInput(instructionFile);
@@ -23,6 +25,11 @@ public class IntCode {
 		process(userInput);
 	}
 
+	public static void run(String instructionFile, ArrayList<Integer> userInputs) {
+		parseInput(instructionFile);
+		process(userInputs);
+	}
+
 	public static void run(int noun, int verb, String instructionFile) {
 		parseInput(instructionFile);
 		memory.put(1, noun);
@@ -31,15 +38,22 @@ public class IntCode {
 	}
 
 	public static void process(Integer userInput) {
-		input = userInput;
+		inputs.add(userInput);
+		process();
+	}
+
+	public static void process(ArrayList<Integer> userInputs) {
+		inputs.addAll(userInputs);
 		process();
 	}
 
 	public static void process() {
-		instructionPointer = 0;
+		if (!pause) { instructionPointer = 0;	}
+		pause = false;
 		while (memory.get(instructionPointer) != 99) {
 			Instruction instruction = new Instruction();
 			instruction.execute();
+			if (pause) { break;	}
 		}
 	}
 

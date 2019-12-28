@@ -1,7 +1,7 @@
 package com.company;
 
 public class Instruction extends IntCode {
-	public static Integer opcode     = 0;
+	public static Integer opcode           = 0;
 	public static Integer pointerIncrement = 0;
 
 	public static Integer param1;
@@ -50,30 +50,35 @@ public class Instruction extends IntCode {
 
 	public void execute() {
 		switch (opcode) {
-		case 1:
+		case 1: // Add params together, store to param3
 			memory.put(param3, param1 + param2);
 			break;
-		case 2:
+		case 2: // Multiply params together, store to param3
 			memory.put(param3, param1 * param2);
 			break;
-		case 3:
-			memory.put(param1, input);
+		case 3: // Accept an input, store in param1
+			if (inputs.size() > 0) {
+				memory.put(param1, inputs.remove(0));
+			} else { // If there are no inputs in the stack, then pause the computation
+				pause = true;
+				pointerIncrement  = 0;
+			}
 			break;
-		case 4:
+		case 4: // Write the value of param1 to the output
 			output = param1;
 			break;
-		case 5:
+		case 5: // Jump-if-true
 			if (!param1.equals(0)) { instructionPointer = param2; }
 			else { instructionPointer += 3; }
 			break;
-		case 6:
+		case 6: // Jump if false
 			if (param1.equals(0)) { instructionPointer = param2; }
 			else { instructionPointer += 3; }
 			break;
-		case 7:
+		case 7: // Less than
 			memory.put(param3, ((param1 < param2) ? 1 : 0));
 			break;
-		case 8:
+		case 8: // Equals
 			memory.put(param3, (param1.equals(param2) ? 1 : 0));
 			break;
 		}

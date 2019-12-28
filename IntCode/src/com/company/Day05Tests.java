@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 public class Day05Tests extends IntCodeTests {
 
-	public static String day = "Day 05";
+	public String day = "Day 05";
 
-	public static void runTests() {
+	public void runTests() {
 		HashMap<Integer, Integer> testMemory = new HashMap<>();
 
 		// Should accept 420 as the input, and store that to the output

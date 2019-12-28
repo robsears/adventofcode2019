@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class Day02Tests extends IntCodeTests {
 	public static String day = "Day 02";
 
-	public static void runTests() {
+	public void runTests() {
 		HashMap<Integer, Integer> testMemory = new HashMap<>();
 
 
